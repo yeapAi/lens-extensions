@@ -1,0 +1,37 @@
+{
+  "name": "@k8slens/change-namespace",
+  "version": "1.0.0",
+  "author": "Yeap",
+  "maintainers": [
+    {
+      "name": "Yeap",
+      "email": "team@yeap.ai"
+    }
+  ],
+  "description": "Change current namespace in terminal from namespace page",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yeapAi/lens-extensions.git",
+    "directory": "change-namespace"
+  },
+  "renderer": "dist/renderer.js",
+  "lens": {
+    "metadata": {},
+    "styles": []
+  },
+  "scripts": {
+    "build": "webpack --config webpack.config.js",
+    "dev": "npm run build --watch"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "ts-loader": "^8.0.4",
+    "typescript": "^4.0.3",
+    "@k8slens/extensions": "^4.0.0-rc.2",
+    "@types/node": "^12.18.3",
+    "@types/react": "^16.9.35",
+    "mobx": "^5.15.5",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.1.1"
+  }
+}
