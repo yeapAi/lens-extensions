@@ -14,14 +14,16 @@
     "url": "https://github.com/yeapAi/lens-extensions.git",
     "directory": "change-namespace"
   },
+  "main": "dist/main.js",
   "renderer": "dist/renderer.js",
   "lens": {
     "metadata": {},
     "styles": []
   },
   "scripts": {
-    "build": "webpack --config webpack.config.js",
-    "dev": "npm run build --watch"
+    "start": "webpack --watch",
+    "build": "npm run clean && webpack",
+    "clean": "rm -rf ./dist"
   },
   "dependencies": {},
   "devDependencies": {
