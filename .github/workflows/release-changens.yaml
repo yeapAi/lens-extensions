@@ -46,6 +46,6 @@ jobs:
           draft: false
           prerelease: true
           files: |
-            k8slens-change-namespace-${{ steps.package-version.outputs.current-version}}.tgz
+            ./change-namespace/k8slens-change-namespace-${{ steps.package-version.outputs.current-version}}.tgz
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
