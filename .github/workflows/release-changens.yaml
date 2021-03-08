@@ -1,0 +1,43 @@
+name: Release change namespace
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag'
+        required: true
+
+env:
+  NODE_VERSION: '14.x'
+
+jobs:
+  release:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: go to project change-namespace
+        run: cd change-namespace
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@yeapai'
+      - name: bump version
+        run: npm version ${{ github.event.inputs.tag }}
+      - name: Install dependencies and build extension
+        run: |
+          npm ci
+          npm run build
+      - name: Create traball from package
+        run: npm pack
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.event.inputs.tag }}
+          body: ${{ github.event.inputs.tag }}
+          draft: false
+          prerelease: true
+          files: |
+            k8slens-change-namespace-${{ github.event.inputs.tag }}.tgz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,34 @@
+name: Build
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+env:
+  NODE_VERSION: '14.x'
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    name: Build
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - uses: dorny/paths-filter@v2
+      id: changes-ns
+      with:
+        filters: |
+          src:
+            - 'change-namespace/**'
+    - name: Build change namespace
+      if: steps.changes-ns.outputs.src == 'true'
+      run : cd change-namespace
+    - name: Use Node.js ${{ env.NODE_VERSION }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+    - name: Install npm dependencies and build extension
+      run: |
+        npm ci
+        npm run build
