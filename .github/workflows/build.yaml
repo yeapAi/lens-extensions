@@ -23,12 +23,15 @@ jobs:
             - 'change-namespace/**'
     - name: Build change namespace
       if: steps.changes-ns.outputs.src == 'true'
-      run : cd change-namespace
+      id: extension
+      run: echo ::set-output name=dir::./change-namespace
     - name: Use Node.js ${{ env.NODE_VERSION }}
+      working-directory: ${{ steps.extension.outputs.dir }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ env.NODE_VERSION }}
     - name: Install npm dependencies and build extension
+      working-directory: ${{ steps.extension.outputs.dir }}
       run: |
         npm ci
         npm run build

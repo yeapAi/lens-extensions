@@ -9,13 +9,16 @@ on:
 env:
   NODE_VERSION: '14.x'
 
+
+defaults:
+  run:
+    working-directory: ./change-namespace
+
 jobs:
   release:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-      - name: go to project change-namespace
-        run: cd change-namespace
       - name: Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v1
         with:
