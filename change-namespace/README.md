@@ -39,3 +39,7 @@ npm run dev
 
 Open Lens application and navigate to the page namespace for a cluster. You should see "Swithc to current" in the contextuel menu.
 You must restart Lens application with each change.
+
+## Publish
+
+Use the action to release a draft (this action create a tag). Go to github to validate the release.
